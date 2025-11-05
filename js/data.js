@@ -255,7 +255,7 @@ const menuDataNested = {
       harga: "Rp 6.000",
       stok: "tersedia",
       deskripsi: "Deskripsi untuk Kopi Susu akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
-      foto: [],
+      foto: ["img/menu-minuman/kopi.png"],
       wa_message: "Halo, saya mau pesan Kopi Susu."
     },
     {
