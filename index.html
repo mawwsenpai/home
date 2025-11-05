@@ -2,85 +2,322 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Warung Geulis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css"> 
-    <script src="js/data.js"></script> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pemberitahuan Penting!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script async src="https://ss.mrmnd.com/interstitial.js" data-mndintid="31d2920a-a141-4d72-8bc9-831f23500e7d"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <style>
+
+    :root {
+    /* Dimensi & Layout */
+    --header-height: 60px;
+    --sidebar-width: 320px;
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --padding-sm: 1rem;
+    --padding-md: 1.5rem;
+    --padding-lg: 2rem;
+    
+    /* Font Default */
+    --font-ui: 'Poppins', sans-serif;
+    --font-reading: 'Lora', serif;
+    
+    /* Transisi */
+    --transition-fast: all .2s ease-in-out;
+    --transition-smooth: all .3s cubic-bezier(.25, .8, .25, 1);
+    
+    /* Variabel Warna Utama (INI ADALAH DARK MODE) */
+    --bg-primary: #0c1012;
+    --bg-primary-rgb: 12, 16, 18;
+    --bg-secondary: #1a2026;
+    --bg-secondary-rgb: 26, 32, 38;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --border-color: #2d3748;
+    --accent-color: #d5c192;
+    --accent-text: #1a202c;
+    --accent-color-rgb: 213, 193, 146;
+    
+    /* Variabel Interaktif & Glassmorphism */
+    --interactive-hover-bg: rgba(255, 255, 255, 0.1);
+    --interactive-active-bg: rgba(213, 193, 146, 0.2);
+    --glass-bg: rgba(var(--bg-secondary-rgb), 0.5);
+    --glass-blur: 10px;
+    
+    /* Variabel Lainnya (ASLI + SYSTEM) */
+    --border-style: 1px solid var(--border-color);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --scroll-thumb-color: rgba(255, 255, 255, 0.3);
+    --z-panel: 1000;
+    --z-loading: 9999;
+    
+    /* Variabel SISTEM TAMBAHAN (Wajib untuk kontrol JS) */
+    --z-bg-animation: -1;
+    --system-font-scale: 1.0;
+    --font-size-base: calc(1rem * var(--system-font-scale));
+}
+        body {
+            overflow: hidden;
+            background-color: var(--bg-primary);
+            margin: 0;
+            padding: 0;
+        }
+        .grid-item {
+            position: relative;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            filter: grayscale(70%) brightness(50%);
+            transition: all 0.3s ease;
+            cursor: default;
+            margin-bottom: 4px;
+        }
+        .grid-item.placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(213, 193, 146, 0.5), transparent);
+            transform: translateX(-100%);
+            animation: glowLine 5s infinite linear;
+            animation-delay: calc(Math.random() * 5s);
+        }
+
+        @keyframes glowLine {
+            0% { transform: translateX(-150%); }
+            100% { transform: translateX(150%); }
+        }
+
+        /* Gaya yang sudah ada */
+        .mobile-view-container {
+            max-width: 450px;
+            width: 100%;
+            height: 100vh;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://source.unsplash.com/random/1920x1080?abstract,dark,tech');
+            background-size: cover;
+            background-position: center;
+        }
+        .image-flow-container {
+            display: flex;
+            width: fit-content;
+            height: 100%;
+            animation: slideBackground 150s linear infinite;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .image-flow-container.loaded {
+            opacity: 1;
+        }
+        .content-wrapper {
+            display: flex;
+            align-items: flex-start;
+            height: 100%;
+        }
+        .masonry-column {
+            display: flex;
+            flex-direction: column;
+            width: 160px;
+            margin: 0 2px;
+        }
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .grid-item.loaded img {
+            opacity: 1;
+        }
+        .grid-item:hover {
+            filter: grayscale(0%) brightness(100%);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+            border-color: var(--accent-color);
+        }
+        @keyframes slideBackground {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .notification-popup{background:var(--glass-bg);backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));padding:2.5rem 3.5rem;border-radius:20px;border:2px solid rgba(var(--border-color),.5);box-shadow:0 10px 30px rgba(0,0,0,.6);z-index:10;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1.5rem;max-width:90%;transition:transform .4s ease-out,opacity .4s ease-out;opacity:0;transform:translateY(20px)}.notification-popup.show{opacity:1;transform:translateY(0)}.notification-popup:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,.5)}.notification-popup .title{font-size:1.8rem;font-weight:700;color:var(--accent-color);text-shadow:0 2px 5px rgba(0,0,0,.5);margin:0}.notification-popup p{font-size:1.1rem;margin:0;color:var(--text-primary)}.notification-popup a{display:inline-block;background-color:var(--accent-color);color:var(--accent-text);padding:.75rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:600;transition:all .2s ease;box-shadow:0 4px 10px rgba(0,0,0,.3)}.notification-popup a:hover{background-color:#f7e0a8;transform:scale(1.05);box-shadow:0 6px 15px rgba(0,0,0,.4)}
+    </style>
 </head>
 <body>
 
-<div class="page-wrapper">
-
-    <div class="header">
-        <h1>WARUNG GEULIS</h1>
-        <p>Makanan khas Sunda, alamat: jalan ass</p>
+    <div class="animated-background">
+        <div class="image-flow-container" id="imageFlowContainer"></div>
     </div>
 
-    <div id="menu-list">
+    <div class="mobile-view-container">
+        <div class="notification-popup" id="notificationPopup">
+            <h2 class="title">Warung Geulis</h2>
+            <p>Selamat datang di <span class="highlight-text"> Warung nasi dan makanan khas sunda </span> klik di bawah ini untuk melihat menu makanan yang tersedia</p>
+            <a href="menu.html" target="_blank">Beranda</a>
         </div>
+    </div>
 
-</div>
-
-<script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.addEventListener('copy', event => { event.preventDefault(); alert('Akses Salin Dilarang.'); });
+    <script src="js/data.js" defer></script>
     
-    const menuContainer = document.getElementById('menu-list');
-    const menuList = menuDataNested;
+    <script>
     
-    function createMenuHTML() {
-        let html = '';
-        const categoryOrder = ["Hidangan Utama", "Nasi & Mie Spesial", "Camilan & Snack", "Minuman"];
+    // Logika 'DOMContentLoaded' ini sudah benar
+    document.addEventListener('DOMContentLoaded', function() {
+        const popup = document.getElementById('notificationPopup');
+        if (popup) {
+            setTimeout(() => popup.classList.add('show'), 500);
+        }
         
-        categoryOrder.forEach(category => {
-            if (menuList[category]) {
-                html += `<div class="menu-section">`;
-                html += `<h3>${category.toUpperCase()}</h3>`; 
-                
-                menuList[category].forEach(item => { 
-                    const itemId = item.id;
-                    // Cek jika foto ada (untuk link review)
-                    const isAvailable = item.foto && item.foto.length > 0; 
-                    // Cek stok
-                    const isOutOfStock = item.stok === 'kosong';
+        // 1. Panggil fungsi untuk ambil gambar dari data.js
+        const dataJsImages = getImagesFromDataJS(); 
+        let finalImageSet = [];
 
-                    let linkClass = "item-link";
-                    let linkHref = `href="${isAvailable ? 'review.html?item=' + itemId : '#'}"`;
+        if (dataJsImages.length > 0) {
+            console.log(`Menggunakan ${dataJsImages.length} gambar dari js/data.js`);
+            finalImageSet = [...dataJsImages];
+        } else {
+            // 2. Jika data.js kosong, pakai fallback Unsplash
+            console.warn("Tidak ada gambar di js/data.js, menggunakan fallback Unsplash.");
+            finalImageSet = getFallbackImages();
+        }
 
-                    // Jika stok kosong
-                    if (isOutOfStock) {
-                        linkClass += " item-kosong"; // Tambah kelas CSS
-                        linkHref = `href="#"`;      // Ubah link agar tidak kemana-mana
-                    }
-                    
-                    html += `
-                        <div class="menu-item">
-                            <a ${linkHref} class="${linkClass}">
-                                <span class="item-name">${item.nama}</span>
-                                <span class="item-price">${item.harga}</span>
-                            </a>
-                        </div>
-                    `;
-                });
-
-                html += `</div>`;
+        // 3. Logika penggandaan gambar
+        if (finalImageSet.length > 0 && finalImageSet.length < 30) {
+            console.log("Jumlah gambar sedikit, menggandakan gambar untuk variasi animasi.");
+            const sourceArray = dataJsImages.length > 0 ? dataJsImages : getFallbackImages(); 
+            
+            while (finalImageSet.length < 80) {
+                finalImageSet.push(...sourceArray);
             }
-        });
+        }
+        
+        // 4. Tampilkan gambar
+        populateImageFlow(finalImageSet, true); 
+    });
 
-        menuContainer.innerHTML = html;
+    // Fungsi untuk baca data.js (Ini penting, JANGAN HAPUS)
+    function getImagesFromDataJS() {
+        const imageUrls = [];
+        
+        if (typeof menuDataNested === 'undefined') {
+            console.error('Variabel menuDataNested (dari js/data.js) tidak ditemukan!');
+            return []; 
+        }
+        
+        try {
+            for (const categoryName in menuDataNested) {
+                const items = menuDataNested[categoryName];
+                items.forEach(item => {
+                    if (item.foto && item.foto.length > 0) {
+                        imageUrls.push(...item.foto);
+                    }
+                });
+            }
+        } catch (error) {
+            console.error("Error saat memproses menuDataNested:", error);
+            return []; 
+        }
+        
+        return imageUrls;
     }
 
 
-    createMenuHTML();
+    function getFallbackImages() {
+        const fallbackUrls = ['https://source.unsplash.com/random/400x600?game,art', 'https://source.unsplash.com/random/400x500?tech,abstract', 'https://source.unsplash.com/random/400x400?minimal,design', 'https://source.unsplash.com/random/400x700?cyber,puzzle', 'https://source.unsplash.com/random/400x300?creative,geometric', 'https://source.unsplash.com/random/400x550?space,stars', 'https://source.unsplash.com/random/400x650?city,lights', 'https://source.unsplash.com/random/400x450?nature,pattern'];
+        let fullFallback = [];
+        for (let i = 0; i < 20; i++) {
+            fullFallback.push(...fallbackUrls);
+        }
+        return fullFallback;
+    }
 
-    const soldOutItems = document.querySelectorAll('.item-kosong');
-    soldOutItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault(); 
-            alert('Habis terjual');
-        });
-    });
-</script>
+    function populateImageFlow(urls, isActualImages = true) {
+        const imageFlowContainer = document.getElementById('imageFlowContainer');
+        urls.sort(() => 0.5 - Math.random());
+        const wrapper1 = createContentWrapper(urls, isActualImages);
+        const wrapper2 = wrapper1.cloneNode(true);
+        imageFlowContainer.innerHTML = '';
+        imageFlowContainer.appendChild(wrapper1);
+        imageFlowContainer.appendChild(wrapper2);
+        setTimeout(() => {
+            imageFlowContainer.classList.add('loaded');
+        }, 20);
+    }
+
+    function createContentWrapper(urls, isActualImages) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'content-wrapper';
+        const panelHeights = [100, 120, 140, 160, 180, 200, 220, 240, 260];
+        const columnWidth = 160 + 4;
+        const viewHeight = window.innerHeight;
+        const numColumns = Math.ceil(window.innerWidth / columnWidth) + 2;
+        const columns = [];
+        const columnHeights = new Array(numColumns).fill(0);
+        
+        for (let i = 0; i < numColumns; i++) {
+            const column = document.createElement('div');
+            column.className = 'masonry-column';
+            wrapper.appendChild(column);
+            columns.push(column);
+        }
+        
+        let imageIndex = 0;
+        for (let i = 0; i < numColumns; i++) {
+            while (columnHeights[i] < viewHeight) {
+                if (urls.length === 0) break;
+                const imageUrl = urls[imageIndex % urls.length];
+                const randomHeight = panelHeights[Math.floor(Math.random() * panelHeights.length)];
+                
+                const item = document.createElement('div');
+                item.className = 'grid-item';
+                item.style.height = `${randomHeight}px`;
+                
+                if (isActualImages) {
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.loading = 'lazy';
+                    img.onload = () => {
+                        item.classList.add('loaded');
+                    };
+                    img.onerror = () => {
+                        item.classList.remove('loaded');
+                        item.classList.add('placeholder');
+                        img.remove(); 
+                    };
+                    item.appendChild(img);
+                } else {
+                    item.classList.add('placeholder');
+                }
+                
+                columns[i].appendChild(item);
+                columnHeights[i] += randomHeight + 4;
+                imageIndex++;
+            }
+        }
+        return wrapper;
+    }
+    </script>
 </body>
 </html>

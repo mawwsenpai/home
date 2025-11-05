@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Warung Geulis</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css"> 
+    
+    <script src="js/data.js" defer></script> 
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <div class="header">
+        <h1>WARUNG GEULIS</h1>
+        <p>Makanan khas Sunda, alamat: jalan ass</p>
+    </div>
+
+    <div id="menu-list">
+        </div>
+
+</div>
+
+<div class="popup-overlay" id="popupOverlay"></div>
+
+<div class="notification-popup" id="soldOutPopup">
+    <h2 class="title">Stok Habis</h2>
+    <p>Maaf, Menu ini sudah habis.</p>
+    <button id="popupCloseButton">Tutup</button>
+</div>
+
+
+<script>
+    // --- Fitur Anti-Copy/Kanan ---
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('copy', event => { 
+        event.preventDefault(); 
+        // Alert ini boleh, karena ini untuk 'copy', bukan stok habis
+        alert('Akses Salin Dilarang.'); 
+    });
+
+    // Tunggu sampai semua HTML & data.js siap
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- 1. Render Menu Dulu ---
+        const menuContainer = document.getElementById('menu-list');
+        
+        // Cek apakah data.js berhasil dimuat
+        if (typeof menuDataNested === 'undefined') {
+            console.error("data.js tidak dimuat atau variabel menuDataNested tidak ada.");
+            if(menuContainer) menuContainer.innerHTML = "<p style='color: var(--text-secondary);'>Gagal memuat menu.</p>";
+            return; // Stop jika data menu tidak ada
+        }
+
+        const menuList = menuDataNested;
+        
+        function createMenuHTML() {
+            let html = '';
+            // Urutan kategori
+            const categoryOrder = ["Hidangan Utama", "Nasi & Mie Spesial", "Camilan & Snack", "Minuman"];
+            
+            categoryOrder.forEach(category => {
+                // Cek jika kategori ada di data.js
+                if (menuList[category]) {
+                    html += `<div class="menu-section">`;
+                    html += `<h3>${category.toUpperCase()}</h3>`; 
+                    
+                    menuList[category].forEach(item => { 
+                        const itemId = item.id;
+                        
+                        // Cek foto (dari kode lo, untuk link review)
+                        const isAvailable = item.foto && item.foto.length > 0;
+                        // Cek stok
+                        const isOutOfStock = item.stok === 'kosong';
+
+                        let linkClass = "item-link";
+                        // Link default (jika ada foto & stok)
+                        let linkHref = `href="${isAvailable ? 'review.html?item=' + itemId : '#'}"`;
+
+                        // Jika stok kosong, timpa link & kelasnya
+                        if (isOutOfStock) {
+                            linkClass += " item-kosong"; // Tambah kelas CSS
+                            linkHref = `href="#"`;     // Ubah link agar tidak kemana-mana
+                        }
+                        
+                        // === PERBAIKAN ===
+                        // <div class="menu-item"> Dihapus
+                        // agar <a> jadi anak langsung dari .menu-section
+                        html += `
+                            <a ${linkHref} class="${linkClass}">
+                                <span class="item-name">${item.nama}</span>
+                                <span class="item-price">${item.harga}</span>
+                            </a>
+                        `;
+                    });
+
+                    html += `</div>`;
+                }
+            });
+            
+            // Masukkan semua HTML yang sudah jadi ke container
+            if (menuContainer) {
+                menuContainer.innerHTML = html;
+            }
+        }
+
+        // Panggil fungsi render menu
+        createMenuHTML();
+
+        // --- 2. Siapkan Logika Popup (PERBAIKAN) ---
+        
+        // Ambil elemen-elemen popup dari HTML
+        const popup = document.getElementById('soldOutPopup');
+        const overlay = document.getElementById('popupOverlay');
+        const closeButton = document.getElementById('popupCloseButton');
+        
+        // Ambil item kosong SETELAH menu di-render
+        const soldOutItems = document.querySelectorAll('.item-kosong');
+
+        // Fungsi untuk menampilkan popup
+        function showSoldOutPopup() {
+            if (!popup || !overlay) {
+                console.error('Elemen popup (soldOutPopup/popupOverlay) tidak ditemukan!');
+                return; 
+            }
+            popup.classList.add('show');
+            overlay.classList.add('show');
+        }
+
+        // Fungsi untuk menyembunyikan popup
+        function hideSoldOutPopup() {
+            if (!popup || !overlay) return;
+            popup.classList.remove('show');
+            overlay.classList.remove('show');
+        }
+
+        // 3. Pasang Listener (Ganti alert)
+        
+        // Pasang listener ke SEMUA item yang kosong
+        soldOutItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault(); // Mencegah pindah halaman
+                showSoldOutPopup(); // <-- Ini pengganti alert()
+            });
+        });
+
+        // Pasang listener ke Tombol Tutup
+        if (closeButton) {
+            closeButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                hideSoldOutPopup();
+            });
+        }
+
+        // Pasang listener ke Overlay (klik di luar panel)
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                hideSoldOutPopup();
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
