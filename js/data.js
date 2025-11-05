@@ -9,7 +9,7 @@ const menuDataNested = {
       harga: "Rp 35.000",
       stok: "tersedia",
       deskripsi: "Deskripsi untuk Tongseng + Nasi akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
-      foto: ["img/menu/nasi.png"], 
+      foto: ["img/menu/tongseng.png"], 
       wa_message: "Halo, saya mau pesan Tongseng + Nasi."
     },
     {
@@ -18,7 +18,7 @@ const menuDataNested = {
       harga: "Rp 35.000",
       stok: "tersedia",
       deskripsi: "Deskripsi untuk Tengkleng + Nasi akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
-      foto: [],
+      foto: ["img/menu/tengkleng.png"],
       wa_message: "Halo, saya mau pesan Tengkleng + Nasi."
     },
     {
