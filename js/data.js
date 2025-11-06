@@ -18,7 +18,7 @@ const menuDataNested = {
       harga: "Rp 35.000",
       stok: "tersedia",
       deskripsi: "Deskripsi untuk Tengkleng + Nasi akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
-      foto: ["img/menu/tengkleng.png"],
+      foto: ["img/menu/tengkleng.jpg", "img/menu/tengkleng2.jpg"],
       wa_message: "Halo, saya mau pesan Tengkleng + Nasi."
     },
     {
@@ -65,7 +65,7 @@ const menuDataNested = {
       id: "nasgor_pedas",
       nama: "Nasi Goreng Pedas",
       harga: "Rp 20.000",
-      stok: "tersedia",
+      stok: "kosong",
       deskripsi: "Deskripsi untuk Nasi Goreng Pedas akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
       foto: [],
       wa_message: "Halo, saya mau pesan Nasi Goreng Pedas."
@@ -74,7 +74,7 @@ const menuDataNested = {
       id: "nasgor_spesial",
       nama: "Nasi Goreng Spesial",
       harga: "Rp 25.000",
-      stok: "tersedia",
+      stok: "kosong",
       deskripsi: "Deskripsi untuk Nasi Goreng Spesial akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
       foto: [],
       wa_message: "Halo, saya mau pesan Nasi Goreng Spesial."
@@ -83,7 +83,7 @@ const menuDataNested = {
       id: "nasgor_seafood",
       nama: "Nasi Goreng Seafood",
       harga: "Rp 25.000",
-      stok: "tersedia",
+      stok: "kosong",
       deskripsi: "Deskripsi untuk Nasi Goreng Seafood akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
       foto: [],
       wa_message: "Halo, saya mau pesan Nasi Goreng Seafood."
@@ -222,7 +222,7 @@ const menuDataNested = {
       id: "telor_dadar",
       nama: "Telor Dadar",
       harga: "Rp 7.000",
-      stok: "tersedia",
+      stok: "kosong",
       deskripsi: "Deskripsi untuk Telor Dadar akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
       foto: [],
       wa_message: "Halo, saya mau pesan Telor Dadar."
@@ -298,7 +298,7 @@ const menuDataNested = {
       id: "jus_strawberry",
       nama: "Jus Strawberry",
       harga: "Rp 12.000",
-      stok: "tersedia",
+      stok: "kosong",
       deskripsi: "Deskripsi untuk Jus Strawberry akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
       foto: [],
       wa_message: "Halo, saya mau pesan Jus Strawberry."
@@ -307,7 +307,7 @@ const menuDataNested = {
       id: "jus_mangga",
       nama: "Jus Mangga",
       harga: "Rp 12.000",
-      stok: "tersedia",
+      stok: "kosong",
       deskripsi: "Deskripsi untuk Jus Mangga akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
       foto: [],
       wa_message: "Halo, saya mau pesan Jus Mangga."
