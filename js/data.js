@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "6283870786588"; 
+const WHATSAPP_NUMBER = "089657756988"; 
 
 const menuDataNested = {
   // KATEGORI 1: HIDANGAN UTAMA
@@ -65,7 +65,7 @@ const menuDataNested = {
       id: "nasgor_pedas",
       nama: "Nasi Goreng Pedas",
       harga: "Rp 20.000",
-      stok: "tersedia",
+      stok: "kosong",
       deskripsi: "Deskripsi untuk Nasi Goreng Pedas akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
       foto: [],
       wa_message: "Halo, saya mau pesan Nasi Goreng Pedas."
@@ -227,15 +227,6 @@ const menuDataNested = {
       foto: [],
       wa_message: "Halo, saya mau pesan Telor Dadar."
     },
-    {
-      id: "Daun-sampe",
-      nama: "Daun Shampe",
-      harga: "Rp 1.999.000",
-      stok: "kosong",
-      deskripsi: "sayur yang langsung di petik dari kebun pak wahyu",
-      foto: ["img/menu/sayur.png"],
-      wa_message: "Halo, saya mau pesan Telor Dadar."
-    }
     ],
   
   // KATEGORI 4: MINUMAN
