@@ -65,7 +65,7 @@ const menuDataNested = {
       id: "nasgor_pedas",
       nama: "Nasi Goreng Pedas",
       harga: "Rp 20.000",
-      stok: "kosong",
+      stok: "tersedia",
       deskripsi: "Deskripsi untuk Nasi Goreng Pedas akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
       foto: [],
       wa_message: "Halo, saya mau pesan Nasi Goreng Pedas."
@@ -74,7 +74,7 @@ const menuDataNested = {
       id: "nasgor_spesial",
       nama: "Nasi Goreng Spesial",
       harga: "Rp 25.000",
-      stok: "kosong",
+      stok: "tersedia",
       deskripsi: "Deskripsi untuk Nasi Goreng Spesial akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
       foto: [],
       wa_message: "Halo, saya mau pesan Nasi Goreng Spesial."
@@ -83,7 +83,7 @@ const menuDataNested = {
       id: "nasgor_seafood",
       nama: "Nasi Goreng Seafood",
       harga: "Rp 25.000",
-      stok: "kosong",
+      stok: "tersedia",
       deskripsi: "Deskripsi untuk Nasi Goreng Seafood akan segera hadir. Silakan tanyakan pada kami untuk info lebih lanjut.",
       foto: [],
       wa_message: "Halo, saya mau pesan Nasi Goreng Seafood."
